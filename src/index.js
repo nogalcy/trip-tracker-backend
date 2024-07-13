@@ -39,6 +39,12 @@ app.options('*', (req, res) => {
   res.status(204).send(); // No Content
 });
 
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Hello World!',
+  });
+});
+
 app.use('/api/logs', logs);
 
 app.use(middlewares.notFound);
