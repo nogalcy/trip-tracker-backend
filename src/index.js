@@ -20,11 +20,26 @@ mongoose.connect(process.env.DATABASE_URL)
 app.use(morgan('combined'));
 app.use(helmet());
 
-app.use(cors({
-    origin: process.env.CORS_ORIGIN
-}));
+const corsOptions = {
+  origin: 'https://trip-tracker-v8v4.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Origin', 'Accept'],
+  credentials: true, // Allow cookies to be sent with requests
+  maxAge: 7200, // Cache preflight response for 2 hours
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
+
+app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://trip-tracker-v8v4.onrender.com');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Origin, Accept');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Max-Age', 7200);
+  res.status(204).send(); // No Content
+});
 
 app.use('/api/logs', logs);
 
