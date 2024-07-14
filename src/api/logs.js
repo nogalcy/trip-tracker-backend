@@ -23,7 +23,7 @@ router.post('/register', async (req, res, next) => {
         const token = jwt.sign({_id: createdUser._id, email: createdUser.email}, process.env.JWT_SECRET, {expiresIn: '1hr'})
         res.json({user: createdUser, token});
     } catch (error) {
-        next(error);
+       return res.status(500).json({ message: 'Server error, please try again later' });
     }
 });
 
@@ -32,16 +32,16 @@ router.post('/login', async (req, res, next) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (!user) {
-            return res.json({ message: 'Fail Username' })
+            return res.status(400).json({ message: 'Invalid Username or Password' })
         }
         const isPasswordvalid = await bcrypt.compare(password, user.password);
         if (!isPasswordvalid) {
-            return res.json({ message: 'Fail Password' });
+            return res.status(400).json({ message: 'Invalid Username or Password' });
         }
         const token = jwt.sign({_id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1hr'})
         res.json({ message: 'Success', token, user});
     } catch (err) {
-        next(err);
+        return res.status(500).json({ message: 'Server error, please try again later' });
     }
 })
 

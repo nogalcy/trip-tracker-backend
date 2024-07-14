@@ -20,6 +20,7 @@ app.use(helmet());
 
 const corsOptions = {
   origin: 'https://trip-tracker-v8v4.onrender.com',
+  // origin: 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Origin', 'Accept'],
   credentials: true, // Allow cookies to be sent with requests
@@ -32,6 +33,7 @@ app.use(express.json());
 
 app.options('*', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://trip-tracker-v8v4.onrender.com');
+  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Origin, Accept');
   res.setHeader('Access-Control-Allow-Credentials', true);
