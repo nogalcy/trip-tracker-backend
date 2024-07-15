@@ -49,21 +49,11 @@ app.get('/', (req, res) => {
 
 app.use('/api/logs', logs);
 
-app.use(express.static(`${process.cwd()}/public/`))
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get('*', async (req, res) => {
-    await res.sendFile(`${process.cwd()}/public/index.html`, (err) => {
-        if (err) {
-            res.status(500).send(err)
-        }
-    })
-});
-
-// app.use(express.static(path.join(__dirname, 'client/build')));
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-// })
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+})
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
