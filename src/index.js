@@ -52,8 +52,10 @@ app.use('/api/logs', logs);
 app.use(express.static(path.join(__dirname, '../../client/build')));
 
 app.get('/*', (req, res) => {
+  console.log('Serving React app for route:', req.url);
   res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
-})
+});
+
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
