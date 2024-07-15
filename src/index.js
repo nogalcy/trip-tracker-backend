@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -40,13 +41,18 @@ app.options('*', (req, res) => {
   res.status(204).send(); // No Content
 });
 
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Hello World!',
-  });
-});
+// app.get('/', (req, res) => {
+//   res.json({
+//     message: 'Hello World!',
+//   });
+// });
 
 app.use('/api/logs', logs);
+
+app.use(express.static(path.join(__dirname, '../../client/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
+})
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
