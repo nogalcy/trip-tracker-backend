@@ -1,3 +1,5 @@
+### Note that this is only the backedn code to make deploying on Render easier, the link to the frontend code is [here](https://github.com/nogalcy/trip-tracker-frontend)
+
 ### Finished backend for the Trip Tracker Website
 
 * MongoDB backend for storing user information and entries
