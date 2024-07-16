@@ -1,11 +1,11 @@
-### Note that this is only the backedn code to make deploying on Render easier, the link to the frontend code is [here](https://github.com/nogalcy/trip-tracker-frontend)
+### Note that this is only the backend code to make deploying on Render easier, the link to the frontend code is [here](https://github.com/nogalcy/trip-tracker-frontend)
 
 ### Finished backend for the Trip Tracker Website
 
 * MongoDB backend for storing user information and entries
 * JWT tokens for authorization and better security
 * Hashed password protection using bcrypt
-* Currently 9 API endpoints with the desire to add more in the future for any additional functionality
+* Currently 10 API endpoints with the desire to add more in the future for any additional functionality
 * Express server used as the server and mongoose used to connect the server with the database operations
 * Error handling and authentication middlewares used
 * Route checking done with Postman, MongoDB checking done with MongoDB Compass
